@@ -19,7 +19,7 @@ pipeline {
                          }
 				         stage('Checkout') {
 							 steps {
-								 git 'git@github.com:bkuptanusree-netizen/terraform-ansible-lab.git
+								 git 'git@github.com:bkuptanusree-netizen/terraform-ansible-lab.git'
 							 }
 						 }				   
                   }
