@@ -17,6 +17,11 @@ pipeline {
                                       sh 'terraform apply -auto-approve'
                                }
                          }
+				         stage('Checkout') {
+							 steps {
+								 git 'git@github.com:bkuptanusree-netizen/terraform-ansible-lab.git
+							 }
+						 }				   
                   }
            }
  
