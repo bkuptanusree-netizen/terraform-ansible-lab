@@ -92,7 +92,7 @@ provisioner "remote-exec" {
 
 }
 provisioner "local-exec" {
-    command = "ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i ansible/inventory.ini ansible/playbook.yml - -private-key sandbox-key.pem -u admin"
+    command = "ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook -i ansible/inventory.ini ansible/playbook.yml - -private-key sandbox-key.pem -u ubuntu"
  }
 }
 
