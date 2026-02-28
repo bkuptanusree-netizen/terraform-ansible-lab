@@ -1,37 +1,41 @@
 pipeline {
                agent any
+			   environment  {
+				   TF_IN_AUTOMATION = "true"
+			   }
+	
                
                stages {
                        stage('Terraform Init') {
 		          steps {
+					  withCredentials([[
+						  $class: 'AmazonWebServicesCredentialsBinding',
+						  credentialsId: 'aws-creds'
+						  ]]) {
                                       sh 'terraform init'
                               }
                        }
                        stage('Terraform Plan') {
                              steps {
-                                     sh '''
-									 terraform plan \
-									 	-no-color \
-										-input=false \
-										-lock=false
-									 '''
+						withCredentials([[
+						  	$class: 'AmazonWebServicesCredentialsBinding',
+						  	credentialsId: 'aws-creds'
+						  	]]) {
+                                     sh 'terraform plan -no-color -input=false'
                               }
                         }
+					   }
                         stage('Terraform Apply') {
                               steps {
-                                      sh '''
-								  	  terraform apply \
-								  		-auto-approve \
-										-no-color \
-										-input=false
-								  	  '''
+							withCredentials([[
+						  		$class: 'AmazonWebServicesCredentialsBinding',
+						  		credentialsId: 'aws-creds'
+						  		]]) {
+                                      sh 'terraform apply -auto-approve -no-color -input=false'
                                }
                          }
-				         stage('Checkout') {
-							 steps {
-								 git 'git@github.com:bkuptanusree-netizen/terraform-ansible-lab.git'
-							 }
-						 }				   
+					}
+						   
                   }
            }
  
