@@ -15,7 +15,7 @@ pipeline {
 		          		steps {
 					  withCredentials([[
 						  $class: 'AmazonWebServicesCredentialsBinding',
-						  credentialsId: 'aws-creds'
+						  credentialsId: 'aws_creds'
 						  ]]) {
                                       sh 'terraform init -no-color'
                               }
@@ -25,7 +25,7 @@ pipeline {
                         	steps {
 						withCredentials([[
 						  	$class: 'AmazonWebServicesCredentialsBinding',
-						  	credentialsId: 'aws-creds'
+						  	credentialsId: 'aws_creds'
 						  	]]) {
                                      sh 'terraform plan -no-color -input=false'
                               }
@@ -35,7 +35,7 @@ pipeline {
                               steps {
 							withCredentials([[
 						  		$class: 'AmazonWebServicesCredentialsBinding',
-						  		credentialsId: 'aws-creds'
+						  		credentialsId: 'aws_creds'
 						  		]]) {
                                       sh 'terraform apply -auto-approve -no-color -input=false'
                                }
