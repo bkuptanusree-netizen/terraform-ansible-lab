@@ -33,7 +33,6 @@ resource "aws_route_table_association" 	"public_assoc" {
 resource "aws_security_group" "sandbox_sg" {
     name = "sandbox-sg"
     vpc_id = aws_vpc.sandbox_vpc.id
-}
 
 ingress {
    from_port   = 22
