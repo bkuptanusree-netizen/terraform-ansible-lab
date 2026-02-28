@@ -9,12 +9,22 @@ pipeline {
                        }
                        stage('Terraform Plan') {
                              steps {
-                                     sh 'terraform plan'
+                                     sh '''
+									 terraform plan \
+									 	-no-color \
+										-input=false \
+										-lock=false
+									 '''
                               }
                         }
                         stage('Terraform Apply') {
                               steps {
-                                      sh 'terraform apply -auto-approve'
+                                      sh '''
+								  	  terraform apply \
+								  		-auto-approve \
+										-no-color \
+										-input=false
+								  	  '''
                                }
                          }
 				         stage('Checkout') {
