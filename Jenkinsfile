@@ -11,9 +11,8 @@ pipeline {
 				   }
 	
                
-               stages {
-                       stage('Terraform Init') {
-		          steps {
+                	stage('Terraform Init') {
+		          		steps {
 					  withCredentials([[
 						  $class: 'AmazonWebServicesCredentialsBinding',
 						  credentialsId: 'aws-creds'
@@ -23,7 +22,7 @@ pipeline {
                        }
 					   }
                        stage('Terraform Plan') {
-                             steps {
+                        	steps {
 						withCredentials([[
 						  	$class: 'AmazonWebServicesCredentialsBinding',
 						  	credentialsId: 'aws-creds'
