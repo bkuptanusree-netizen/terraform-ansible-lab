@@ -3,6 +3,12 @@ pipeline {
 			   environment  {
 				   TF_IN_AUTOMATION = "true"
 			   }
+			   stages {
+				   stage('Checkout') {
+					   steps {
+						   checkout scm
+					   }
+				   }
 	
                
                stages {
@@ -12,9 +18,10 @@ pipeline {
 						  $class: 'AmazonWebServicesCredentialsBinding',
 						  credentialsId: 'aws-creds'
 						  ]]) {
-                                      sh 'terraform init'
+                                      sh 'terraform init -no-color'
                               }
                        }
+					   }
                        stage('Terraform Plan') {
                              steps {
 						withCredentials([[
