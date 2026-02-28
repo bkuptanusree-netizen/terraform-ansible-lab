@@ -71,7 +71,7 @@ resource "local_file" "private_key" {
 }
 # EC2 Instance
 resource "aws_instance" "sandbox_vm" {
-    ami                         =  "ami-01794c3812ef4f99a" # Ubuntu (us-east-1)
+    ami                         =  "ami-0c1ac8a41498c1a9c" # Debian (us-east-1)
     instance_type               = "t2.micro"
     subnet_id                   = aws_subnet.sandbox_subnet.id
     vpc_security_group_ids      = [aws_security_group.sandbox_sg.id]
@@ -80,7 +80,7 @@ resource "aws_instance" "sandbox_vm" {
 
 connection {
     type              = "ssh"
-    user              = "ubuntu"
+    user              = "admin"
     private_key = tls_private_key.ssh_key.private_key_pem
     host              = self.public_ip
   }
